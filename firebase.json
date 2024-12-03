@@ -1,0 +1,1 @@
+{"flutter":{"platforms":{"android":{"default":{"projectId":"scryfall-app","appId":"1:826894805748:android:65b5cb8553b9a2776acca1","fileOutput":"android/app/google-services.json"}},"dart":{"lib/firebase_options.dart":{"projectId":"scryfall-app","configurations":{"android":"1:826894805748:android:65b5cb8553b9a2776acca1","web":"1:826894805748:web:316efe279e5e628e6acca1"}}}}}}

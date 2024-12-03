@@ -1,0 +1,35 @@
+name: scryfall_app
+description: "A new Flutter project."
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: ^3.5.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  dio: ^5.7.0
+  get: ^4.6.6
+  firebase_core: ^3.8.0
+  firebase_auth: ^5.3.3
+  sign_in_button: ^3.2.0
+  google_mlkit_text_recognition: ^0.14.0
+  # gallery_picker: ^0.5.1
+  image_picker: ^1.1.2
+  flutter_launcher_icons: ^0.13.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/img/
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  image_path: "assets/img/scryfall-logo.png"
+  min_sdk_android: 21

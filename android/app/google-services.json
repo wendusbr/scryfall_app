@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "826894805748",
+    "project_id": "scryfall-app",
+    "storage_bucket": "scryfall-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:826894805748:android:65b5cb8553b9a2776acca1",
+        "android_client_info": {
+          "package_name": "com.scryfall_app.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "826894805748-foa7bufp9lv4pgc5sln13vu55kkmn8ks.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBcm8qxtI52ydLDD3HSTUlbYQES5Yklrkw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "826894805748-foa7bufp9lv4pgc5sln13vu55kkmn8ks.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
