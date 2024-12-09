@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:scryfall_app/controllers/userController.dart';
 import 'package:sign_in_button/sign_in_button.dart';
 
 class Login extends StatefulWidget {
@@ -44,7 +45,12 @@ class _LoginState extends State<Login> {
                   onPressed: login, 
                   text: 'Login with Google',
                 ),
-                TextButton(onPressed: () => Get.toNamed('/'), child: Text('Continue without an account', style: TextStyle(color: Colors.grey),))
+                TextButton(
+                  onPressed: () {
+                    Get.delete<UserController>();
+                    Get.toNamed('/');
+                  }, 
+                  child: Text('Continue without an account', style: TextStyle(color: Colors.grey),))
               ],
             ),
           ),
@@ -62,12 +68,14 @@ class _LoginState extends State<Login> {
           SnackBar(content: Text('Successful Login'))
       );
 
+      UserController userController = Get.put(UserController(_user!));
+    
       Get.toNamed('/');
     }
     catch(e){
       print(e);
       ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('${e}'))
+          SnackBar(content: Text('$e'))
       );
     }
   }

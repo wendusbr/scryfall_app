@@ -11,6 +11,7 @@ class Search extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: Color(0xFF242031),
           iconTheme: IconThemeData(color: Colors.white),
+          title: Text('Search Cards', style: TextStyle(color: Colors.white),),
         ),
         body: buildCardsLayout()
         );

@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 
 import 'package:image_picker/image_picker.dart';
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
+import 'package:scryfall_app/controllers/userController.dart';
 
 class Home extends StatelessWidget {
   Home({super.key});
@@ -98,10 +99,23 @@ class Home extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
+                    IconButton(
+                      onPressed: () {
+                        if(Get.isRegistered<UserController>()) {
+                          Get.toNamed('/favorites');
+                        }
+                        else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text('To access favorites cards, you need to be logged in.'))
+                          );
+                        }
+                      }, 
+                      icon: Icon(Icons.star)
+                    ),
                     ElevatedButton(
                       onPressed: () => Get.toNamed('/search', arguments: textEditingController.text),
                       child: Text('Search')
-                    )
+                    ),
                   ],
                 )
               ],

@@ -1,11 +1,18 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scryfall_app/api.dart';
+import 'package:scryfall_app/controllers/userController.dart';
+import 'package:scryfall_app/models/favorite.dart';
+import 'package:scryfall_app/services/database_service.dart';
 
 class Details extends StatelessWidget {
   Details({super.key});
 
-  final Future<Map> rulings = Api.searchRulings(Get.arguments['id']);
+  final Map<dynamic, dynamic> card = Get.arguments;
+  final DatabaseService _databaseService = DatabaseService();
+
+  
 
   @override
   Widget build(BuildContext context) {
@@ -15,6 +22,48 @@ class Details extends StatelessWidget {
         iconTheme: IconThemeData(
           color: Colors.white
         ),
+        actions: [
+          if(Get.isRegistered<UserController>())
+            StreamBuilder(
+              stream: _databaseService.getFavorite(card['id']),
+              builder: (context, snapshot) {
+                List favorite = snapshot.data?.docs ?? [];
+
+                if (favorite.isEmpty) {
+                  return IconButton(
+                    onPressed: () {
+                      UserController userController = Get.find();
+                      Favorite favorite = Favorite(card_id: card['id'], card_image: card['image_uris']['small'], created_at: Timestamp.now(), user_id: userController.getUserId());
+
+                      _databaseService.addFavorite(favorite);
+
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('Card added to favorites.'),
+                          duration: Duration(seconds: 1),
+                          )
+                      );
+                    }, 
+                    icon: Icon(Icons.star_border)
+                    );
+                }
+
+                return IconButton(
+                  onPressed: () {
+                    _databaseService.deleteFavorite(favorite[0].id);
+
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('Card removed from favorites.'),
+                        duration: Duration(seconds: 1),
+                      )
+                    );
+                  }, 
+                  icon: Icon(Icons.star)
+                );
+              }
+            )
+        ],
       ),
 
       body: buildCardInfo()
@@ -22,7 +71,6 @@ class Details extends StatelessWidget {
   }
 
   Widget buildCardInfo(){
-    Map<dynamic, dynamic> card = Get.arguments;
     Future<Map> requestRulings = Api.searchRulings(card['id']);
 
     return SingleChildScrollView(
@@ -290,4 +338,6 @@ class Details extends StatelessWidget {
     }
     
   }
+
+
 }
